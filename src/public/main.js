@@ -1,1 +1,1 @@
-console.log('from main.js')
+io()
