@@ -12,6 +12,10 @@ io.on('connection', (socket) => {
   console.log('nueva conexión', socket.id);
 
   socket.emit('ping');
+
+  socket.on('pong', () => {
+    console.log('pong!');
+  })
 });
 
 server.listen(3000);
