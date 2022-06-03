@@ -14,6 +14,8 @@ app.use(express.static(__dirname + '/public'));
 io.on('connection', (socket) => {
   console.log('nueva conexión', socket.id);
 
+  socket.emit('server:loadnotes', notes);
+
   socket.on('client:newnote', ({ title, description }) => {
     const new_note = {
       title,
@@ -23,7 +25,6 @@ io.on('connection', (socket) => {
     notes.push(new_note);
     socket.emit('server:newnote', new_note);
   });
-  socket.emit('client:rendernotes')
 });
 
 server.listen(3000);
