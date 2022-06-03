@@ -4,7 +4,13 @@ const description = document.querySelector('#description');
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  console.log('submit', title.value, description.value)
 
-  saveNote(title.value, description.value);
+  if (!savedId) {
+    saveNote(title.value, description.value);
+  } else {
+    updateNote(savedId, title.value, description.value)
+  }
+
+  title.value = '';
+  description.value = '';
 });

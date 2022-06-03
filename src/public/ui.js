@@ -1,4 +1,5 @@
 const notesList = document.querySelector('#notes');
+let savedId = '';
 
 const noteUI = note => {
   const div = document.createElement('div');
@@ -16,9 +17,14 @@ const noteUI = note => {
   `;
 
   const btnDelete = div.querySelector('.delete');
+  const btnUpdate = div.querySelector('.update');
+
   btnDelete.addEventListener('click', () => {
     deleteNote(btnDelete.dataset.id);
-  })
+  });
+  btnUpdate.addEventListener('click', () => {
+    getNote(btnUpdate.dataset.id);
+  });
 
   return div;
 }
@@ -31,3 +37,13 @@ const renderNotes = notes => {
 const appendNote = note => {
   notesList.append(noteUI(note))
 };
+
+const fillNote = note => {
+  const title = document.querySelector('#title');
+  const description = document.querySelector('#description');
+
+  title.value = note.title;
+  description.value = note.description;
+
+  savedId = note.id;
+}
