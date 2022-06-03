@@ -1,7 +1,20 @@
 const socket = io();
 
-socket.on('ping', () => {
-  console.log('ping');
+const form = document.querySelector('#form');
+const title = document.querySelector('#title');
+const description = document.querySelector('#description');
+const notes = document.querySelector('#notes');
 
-  socket.emit('pong');
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  console.log('submit', title.value, description.value)
+
+  socket.emit('client:newnote', {
+    title: title.value,
+    description: description.value
+  });
+
+  socket.on('server:newnote', data => {
+    notes.innerHTML += 'new note'
+  });
 });
