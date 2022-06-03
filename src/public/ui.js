@@ -17,15 +17,15 @@ const noteUI = note => {
 
   const btnDelete = div.querySelector('.delete');
   btnDelete.addEventListener('click', () => {
-    console.log(btnDelete.dataset.id)
+    deleteNote(btnDelete.dataset.id);
   })
 
   return div;
 }
 
 const renderNotes = notes => {
+  notesList.innerHTML = '';
   notes.forEach(note => notesList.append(noteUI(note)));
-  console.log({ notes })
 };
 
 const appendNote = note => {

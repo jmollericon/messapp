@@ -7,7 +7,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new WebSocketServer(server);
 
-const notes = [];
+let notes = [];
 
 app.use(express.static(__dirname + '/public'));
 
@@ -25,6 +25,10 @@ io.on('connection', (socket) => {
     notes.push(new_note);
     socket.emit('server:newnote', new_note);
   });
+  socket.on('client:deletenote', (id) => {
+    notes = notes.filter(note => note.id !== id);
+    socket.emit('server:loadnotes', notes);
+  })
 });
 
 server.listen(3000);
