@@ -21,7 +21,7 @@ io.on('connection', (socket) => {
       id: uuid()
     };
     notes.push(new_note);
-    socket.emit('server:newnote')
+    socket.emit('server:newnote', new_note);
   });
   socket.emit('client:rendernotes')
 });
